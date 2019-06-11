@@ -1,0 +1,36 @@
+-
+  name: ansible audit script
+  hosts: all
+  become: yes
+  become_method: sudo
+  vars:
+        Amazon: "Amazon Linux AMI"
+        Rhel: "rhel"
+        Debian: "debian"
+  tasks:
+
+    - name: see the stuffs inside directory
+      shell: ls
+      
+    - name: command to check with OS this EC2 is using
+      #command: echo "testing234"
+      command: cat /etc/os-release
+      register: command_output
+
+    - command: "{{ item }}"
+      with_items:
+      - echo "this is an Amazon"
+      - yum list installed
+      when: command_output.stdout.find(Amazon) != -1
+
+    - command: "{{ item }}"
+      with_items:
+      - echo "this is a debian"
+      - apt list --installed  
+      when: command_output.stdout.find(Debian) != -1
+
+    - command: "{{ item }}"
+      with_items:
+      - echo "this is rehl"
+      - rpm -qa
+      when: command_output.stdout.find(Rhel) != -1
