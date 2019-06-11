@@ -5,7 +5,6 @@
   become_method: sudo
   
 
-    - name: see the stuffs inside directory
-      shell: ls
+    # - name: see the stuffs inside directory
+    #   shell: ls
       
-    
