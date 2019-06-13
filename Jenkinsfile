@@ -21,7 +21,7 @@ node('master') {
             sh "ls"
             sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
             //sh "pip install boto"
-            sh "pip install boto3"
+            sh "sudo pip install boto3"
             //sh "pip install boto3 --ignore-installed ${six}"
             sh "ansible-playbook playbook-ansible-create-ec2.yaml -i inventory.txt"
         }
