@@ -22,8 +22,8 @@ node('master') {
             sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
             sh "python --version"
             sh "pip --version"
-            sh "pip install boto"
-            sh "pip install boto3"
+            sh "pip install --user boto"
+            sh "pip install --user boto3"
             
             //sh "pip install boto"
             //sh "pip install boto3"
