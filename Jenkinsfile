@@ -20,6 +20,8 @@ node('master') {
             sh "cp \$mySecretKey /var/lib/jenkins/workspace/wilson-test-create-ec2"
             sh "ls"
             sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
+            sh "sudo pip install boto"
+            sh "pip install boto3 --ignore-installed ${six}"
             sh "ansible-playbook playbook-ansible-create-ec2.yaml -i inventory.txt"
         }
             
