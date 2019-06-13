@@ -1,9 +1,24 @@
 -
-  name: ansible audit script
+  name: ansible create EC2
   hosts: all
+  connection: local
   become: yes
   become_method: sudo
-  
+  tasks: 
+    - name: build EC2
+      ec2:
+        instance_type: t2.micro
+        key_name: Wilson-Test-EC2KeyPair
+        image: ami-0756fbca465a59a30
+        region: us-east-1f
+        group: wilson-test-WebDMZ
+        count: 1
+        vpc_subnet_id: subnet-ca78f0c6
+        wait: yes
+        assign_public_ip: yes
+
+
+
 
     # - name: see the stuffs inside directory
     #   shell: ls
