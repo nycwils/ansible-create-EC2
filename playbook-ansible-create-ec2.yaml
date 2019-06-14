@@ -63,7 +63,7 @@
     
     - ec2_instance_facts:
         filters:
-        "tag:Name": wilson-test-web-server
+        tag:Name: wilson-test-web-server
 
 
     - name: Terminate instances that were previously launched
