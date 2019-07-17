@@ -68,7 +68,7 @@
         become_method: sudo
         tasks:
           - name: check to see if i'm connected to EC2
-          shell: ls
+            shell: ls
 
 
     - name: Terminate instances that were previously launched
