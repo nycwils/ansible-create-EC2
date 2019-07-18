@@ -43,7 +43,7 @@
                       region={{ region }}
                       keypair={{ keypair }}
                       count={{count}}
-                      assign_public_ip={ ip }
+                      assign_public_ip={{ ip }}
       register: ec2
 
     - name: Wait for EC2 Instance to Spin-up and ready for SSH access
