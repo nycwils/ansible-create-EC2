@@ -48,7 +48,6 @@
 
     - name: Wait for EC2 Instance to Spin-up and ready for SSH access
       local_action: wait_for
-                      #host={{ item.public_ip }}
                       host=target2
                       port=22
                       state=started
