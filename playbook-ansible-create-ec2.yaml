@@ -67,8 +67,7 @@
       become: yes
       become_method: sudo
       tasks:
-        - name: do an ls
-          shell: ls
+    
   
 
     # - name: Terminate instances that were previously launched
