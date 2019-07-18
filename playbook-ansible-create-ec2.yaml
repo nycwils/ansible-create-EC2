@@ -62,11 +62,7 @@
           Owner: wilson lam
           PurPose: provision ec2 then connect and do stuffs
 
-    - name: ssh into it
-      hosts: target2
-      become: yes
-      become_method: sudo
-      tasks:
+    
     
   
 
