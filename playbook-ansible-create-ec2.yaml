@@ -63,7 +63,7 @@
           PurPose: provision ec2 then connect and do stuffs
 
     - name: ssh into it
-      hosts: ec2.instances.host
+      hosts: target2
       become: yes
       become_method: sudo
       tasks:
