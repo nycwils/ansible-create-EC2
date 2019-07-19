@@ -1,2 +1,7 @@
-localhost
-target2 ansible_host=ec2-user@{{item.public_ip}} ansible_ssh_private_key_file=/var/lib/jenkins/workspace/wilson-test-create-ec2/Wilson-Test-EC2KeyPair.pem
+[localhost]
+127.0.0.1
+[target2]
+
+[target2:vars]
+ansible_ssh_private_key_file=/var/lib/jenkins/workspace/wilson-test-create-ec2/Wilson-Test-EC2KeyPair.pem
+ansible_ssh_user=ec2-user
