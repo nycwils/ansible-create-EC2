@@ -49,7 +49,6 @@
     - name: Wait for EC2 Instance to Spin-up and ready for SSH access
       local_action: wait_for
                       host={{ item.public_ip }}
-                      #host=ec2-user@"{{ item.public_ip }}" ansible_ssh_private_key_file=/var/lib/jenkins/workspace/test-wilson-aws-training-pipeline/Wilson-Test-EC2KeyPair.pem
                       port=22
                       state=started
       with_items: "{{ ec2.instances }}"
@@ -67,6 +66,7 @@
     #register ec2 as host in inventory file.  
     
   
+    #host=ec2-user@"{{ item.public_ip }}" ansible_ssh_private_key_file=/var/lib/jenkins/workspace/test-wilson-aws-training-pipeline/Wilson-Test-EC2KeyPair.pem
 
     # - name: Terminate instances that were previously launched
     #   ec2:
