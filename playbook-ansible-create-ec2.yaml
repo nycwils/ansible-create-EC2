@@ -63,6 +63,17 @@
           #version number or jenkins number put here.  jenkins number or some ways to keep track of deployment.  do another ec2 gather facts.
           PurPose: provision ec2 then connect and do stuffs
 
+   - name: Stop or terminate myserver instance
+     local_action:
+          module: ec2
+          region: "us-east-1"
+          instance_ids: "{{ id }}"
+          state: stopped
+      with_items: "{{ ec2.instances}}"
+
+
+
+
     #register ec2 as host in inventory file.  
     
   
