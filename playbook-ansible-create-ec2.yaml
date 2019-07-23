@@ -32,8 +32,11 @@
           rules_egress:
             - proto: all
               cidr_ip: 0.0.0.0/0
-    - name: first pwd command  
-      shell: pwd
+    - name: create first file  
+      shell: echo "Some text here." >> myfile.txt
+
+    - name: is my new file here???  
+      shell: ls     
 
     - name: Launch the new t2 micro EC2 Instance
       local_action: ec2
