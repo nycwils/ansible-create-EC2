@@ -13,6 +13,9 @@
     keypair: Wilson-Test-EC2KeyPair
     count: 1
 
+    - name: first pwd command goes here  
+      command: pwd
+
   tasks: 
     - name: build EC2
       local_action:
