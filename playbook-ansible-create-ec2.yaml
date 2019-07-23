@@ -32,8 +32,8 @@
           rules_egress:
             - proto: all
               cidr_ip: 0.0.0.0/0
-    - name: see whats the file like.  i want to store the instances.id somewhere for later use.  
-      command: pwd
+    - name: first pwd command  
+      shell: pwd
 
     - name: Launch the new t2 micro EC2 Instance
       local_action: ec2
