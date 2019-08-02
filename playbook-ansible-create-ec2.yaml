@@ -68,7 +68,7 @@
           PurPose: provision ec2 then connect and do stuffs
 
     - name: see whats the file like.  i want to store the instances.id somewhere for later use.  
-      command: pwd
+      command: ls
       # try running in verbose.  
 
 
