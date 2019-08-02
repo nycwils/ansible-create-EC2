@@ -89,6 +89,7 @@
 
     - name: copy instance id to a file
       local_action: copy content="{{ item.id }}" dest="/var/lib/jenkins/workspace/wilson-test-create-ec2/{{ item.id }}.txt"
+      local_action: copy content="{{ item.public_ip }}" dest="/var/lib/jenkins/workspace/wilson-test-create-ec2/{{ item.public_ip }}.txt"
       with_items: "{{ ec2.instances}}"
 
     #register ec2 as host in inventory file.  
