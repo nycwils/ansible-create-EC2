@@ -40,7 +40,7 @@ node('master') {
   
     stage("Wipe Out Jenkins Temp Workspace") {
 
-      deleteDir()
+      //deleteDir()
        
     }
 
