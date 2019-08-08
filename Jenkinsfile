@@ -33,7 +33,7 @@ node('master') {
 
             //here is where i get the ip and session file name and fix it up, and put it in inventory file
             sh "var1=$(find . -name 'i-*')"
-            sh "echo $var1"
+            sh "echo \$var1"
         }
             
           
