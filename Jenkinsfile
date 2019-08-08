@@ -32,7 +32,7 @@ node('master') {
             sh "ansible-playbook playbook-ansible-create-ec2.yaml -vvv -i inventory.txt"
 
             //here is where i get the ip and session file name and fix it up, and put it in inventory file
-            sh "var1=$(find . -name 'i-*')"
+            sh "var1=\$(find . -name 'i-*')"
             sh "echo \$var1"
         }
             
