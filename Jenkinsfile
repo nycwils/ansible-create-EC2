@@ -39,7 +39,7 @@ node('master') {
             sh "sed -i '1s/^/target2 ansible_host=ec2-user@/' inventory2.txt"
             sh "sed -i '\$ s/\$/ ansible_ssh_private_key_file=\\/var\\/lib\\/jenkins\\/workspace\\/wilson-test-create-ec2\\/Wilson-Test-EC2KeyPair.pem/' inventory2.txt"
 
-            sleep(120)
+            sleep(180)
             //connect to playbook 2 here to launch ec2 instance and install stuffs
             sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
         }
