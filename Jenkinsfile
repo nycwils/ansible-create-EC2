@@ -37,9 +37,9 @@ node('master') {
             sh "var1=\$(find . -name 'i-*') && var11=\${var1:2} && varSession=\${var11::-4} && echo \$varSession" 
             sh "var2=\$(find . -name [0-9]*) && var22=\${var2:2} && varIP=\${var22::-4} && echo \$varIP && echo \$varIP > inventory2.txt"
             sh "sed -i '1s/^/target2 ansible_host=ec2-user@/' inventory2.txt"
-            sh "sed -i '\$ s/\$/ ansible_ssh_private_key_file=\\/var\\/lib\\/jenkins\\/workspace\\/wilson-test-create-ec2\\/Wilson-Test-EC2KeyPair.pem/' inventory2.txt"
+            sh "sed -i '\$ s/\$/ ansible_ssh_private_key_file=\\/var\\/lib\\/jenkins\\/workspace\\/wilson-test-create-ec2\\/Wilson-Test-EC2KeyPair.pem/'"
 
-            sleep(180)
+            sleep(240)
             //connect to playbook 2 here to launch ec2 instance and install stuffs
             sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
         }
