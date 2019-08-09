@@ -1,54 +1,13 @@
 -
-  name: running docker image on EC2s
+  name: running second playbook that deploys app and then deletes previous EC2 instance
   hosts: all
   become: yes
   become_method: sudo
   tasks:
-#    - name: Install pip
-#      apt: name=python-pip state=present
-
-#    - name: install docker-py
-#      pip: name=docker-py
 
 
-    - name: configure / Update yum packages
-      yum:
-        name: '*'
-        state: latest
-        update_cache: yes
-
-    - name: install docker
-      yum:
-        name='docker'
-        state=latest
-
-    - name: pull an image
-      docker_image:
-        name: nyuwilson/wilson:jenkinsdockerpush
-
-    - name: stop all docker containers
-      shell: docker stop $(docker ps -a -q)
-      ignore_errors: true
-
-    - name: service docker
-      service:
-        name=docker
-        state=started
-        enabled=yes
-
-    - name: Start docker docker_container
-      docker_container:
-        name: nyuwilson
-        image: nyuwilson/wilson:jenkinsdockerpush
-        ports:
-          - "80:80"
-
-#    - name: Builder Docker image from DockerFile
-#      docker_image:
-#        name: nyuwilson
-#        path: nyuwilson/wilson:jenkinsdockerpush
-#        state: build
-
+    - name: Is this playbook2 working???????
+      shell: ls 
 
 
 
