@@ -59,32 +59,16 @@ node('master') {
        
     //sed -i '$ s/$/ ansible_ssh_private_key_file=\/var\/lib\/jenkins\/workspace\/wilson-test-create-ec2\/Wilson-Test-EC2KeyPair.pem/' inventory2.txt
     //sed -i '$ s/$/ Wilson-Test-EC2KeyPair.pem ansible_ssh_common_args='"'"'-o StrictHostKeyChecking=no'"'"'  /'"'" inventory.txt
-     stage("Wipe Out Jenkins Temp Workspace") {
-
-      deleteDir()
-       
-    }
+  
 
 
 stage("Run Ancible Playbook two") {
 
         
             withCredentials([file(credentialsId: '92045f3a-fdb3-491e-ad2e-d6b9fe7aa3e5', variable: 'mySecretKey')]){
-           
-            sh "touch inventory2.txt"
-            sh "var1=\$(find . -name 'i-*') && var11=\${var1:2} && varSession=\${var11::-4} && echo \$varSession" 
-            sh "var2=\$(find . -name [0-9]*) && var22=\${var2:2} && varIP=\${var22::-4} && echo \$varIP && echo \$varIP > inventory2.txt"
-            sh "sed -i '1s/^/target2 ansible_host=ec2-user@/' inventory2.txt"
-            sh "sed -i '\$ s/\$/ ansible_ssh_private_key_file=\\/var\\/lib\\/jenkins\\/workspace\\/wilson-test-create-ec2\\/Wilson-Test-EC2KeyPair.pem /' inventory2.txt"
-            
-            sh "chmod -R 777 /var/lib/jenkins/workspace/wilson-test-create-ec2"
-            sh "cp \$mySecretKey /var/lib/jenkins/workspace/wilson-test-create-ec2"
-            sh "ls"
-            sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
-            sh "python --version"
-            sh "pip --version"
-            sh "pip install --user boto"
-            sh "pip install --user boto3"
+          
+            sh "chmod -R 777 /var/lib/jenkins/workspace/wilson-test-create-ec2/inventory.txt"
+
             
             sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
 
@@ -95,7 +79,7 @@ stage("Run Ancible Playbook two") {
   
     stage("Wipe Out Jenkins Temp Workspace") {
 
-      deleteDir()
+      //deleteDir()
        
     }
 
