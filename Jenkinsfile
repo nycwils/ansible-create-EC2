@@ -23,7 +23,8 @@ node('master') {
             sh "chmod -R 777 /var/lib/jenkins/workspace/wilson-test-create-ec2"
             sh "cp \$mySecretKey /var/lib/jenkins/workspace/wilson-test-create-ec2"
             sh "ls"
-            sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
+            //sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
+            sh "chmod 777 Wilson-Test-EC2KeyPair.pem"
             sh "python --version"
             sh "pip --version"
             sh "pip install --user boto"
@@ -51,7 +52,7 @@ node('master') {
 
             //connect to playbook 2 here to launch ec2 instance and install stuffs
             // sed -i '$ s/$/ ansible_ssh_common_args='-o StrictHostKeyChecking=no' /' inventory.txt
-            //sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
+            sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
         }
             
           
@@ -62,20 +63,6 @@ node('master') {
   
 
 
-stage("Run Ancible Playbook two") {
-
-        
-            withCredentials([file(credentialsId: '92045f3a-fdb3-491e-ad2e-d6b9fe7aa3e5', variable: 'mySecretKey')]){
-          
-            sh "chmod -R 777 /var/lib/jenkins/workspace/wilson-test-create-ec2/inventory.txt"
-
-            
-            sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
-
-            }
-            
-          
-        }
   
     stage("Wipe Out Jenkins Temp Workspace") {
 
