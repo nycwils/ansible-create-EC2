@@ -20,7 +20,7 @@ node('master') {
             sh "pwd"
             sh "ls"
             //sh "rm Wilson-Test-EC2KeyPair.pem"
-            sh "sudo chmod -R 777 /var/lib/jenkins/workspace/wilson-test-create-ec2"
+            sh "chmod -R 777 /var/lib/jenkins/workspace/wilson-test-create-ec2"
             sh "cp \$mySecretKey /var/lib/jenkins/workspace/wilson-test-create-ec2"
             sh "ls"
             sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
@@ -34,9 +34,9 @@ node('master') {
             //sh "pip install boto3 --ignore-installed ${six}"
             //sh "vi ~/.boto"
 
-            sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
-            sleep(300)
-            //sh "ansible-playbook playbook-ansible-create-ec2.yaml -vvv -i inventory.txt"
+            //sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
+            //sleep(300)
+            sh "ansible-playbook playbook-ansible-create-ec2.yaml -vvv -i inventory.txt"
 
             //here is where i get the ip and session file name and fix it up, and put it in inventory file
             
@@ -51,7 +51,7 @@ node('master') {
 
             //connect to playbook 2 here to launch ec2 instance and install stuffs
             // sed -i '$ s/$/ ansible_ssh_common_args='-o StrictHostKeyChecking=no' /' inventory.txt
-            sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
+            //sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
         }
             
           
@@ -60,7 +60,17 @@ node('master') {
     //sed -i '$ s/$/ ansible_ssh_private_key_file=\/var\/lib\/jenkins\/workspace\/wilson-test-create-ec2\/Wilson-Test-EC2KeyPair.pem/' inventory2.txt
     //sed -i '$ s/$/ Wilson-Test-EC2KeyPair.pem ansible_ssh_common_args='"'"'-o StrictHostKeyChecking=no'"'"'  /'"'" inventory.txt
    
+stage("Run Ancible Playbook two") {
 
+        
+            withCredentials([file(credentialsId: '92045f3a-fdb3-491e-ad2e-d6b9fe7aa3e5', variable: 'mySecretKey')]){
+           
+       
+          
+            }
+            
+          
+        }
   
     stage("Wipe Out Jenkins Temp Workspace") {
 
