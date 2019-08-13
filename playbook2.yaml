@@ -7,7 +7,7 @@
 
 
     - name: Is this playbook2 working???????
-      shell: cmd
+      shell: ls
 
 
 
