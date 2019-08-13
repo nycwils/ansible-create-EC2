@@ -1,10 +1,6 @@
 -
   name: running second playbook that deploys app and then deletes previous EC2 instance
   hosts: all
-  vars:
-    ansible_host_key_checking: false
-  roles:
-    - including_vars
   become: yes
   become_method: sudo
   tasks:
