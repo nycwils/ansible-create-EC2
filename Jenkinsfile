@@ -55,7 +55,7 @@ node('master') {
             //connect to playbook 2 here to launch ec2 instance and install stuffs
             // sed -i '$ s/$/ ansible_ssh_common_args='-o StrictHostKeyChecking=no' /' inventory.txt
             //sh "sed -i \"\$ s/\$/ public_file=\\/var\\/lib\\/jenkins\\/workspace\\/test-project\\ ansible_ssh_common_args='-o StrictHostKeyChecking=no'  /\" inventory2.txt"
-            sh "ansible-playbook playbook2.yaml -i inventory2.txt"
+            sh "ansible-playbook playbook2.yaml -i -vvv inventory2.txt"
         }
             //sh "sed -i '\$ s/\$/ public_file=\\/var\\/lib\\/jenkins\\/workspace\\/test-project\\ ansible_ssh_common_args='-o StrictHostKeyChecking=no'  /' inventory2.txt"
           
