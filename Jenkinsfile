@@ -24,7 +24,7 @@ node('master') {
             sh "cp \$mySecretKey /var/lib/jenkins/workspace/wilson-test-create-ec2"
             sh "ls"
             //sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
-            sh "chmod 777 Wilson-Test-EC2KeyPair.pem"
+            sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
             sh "python --version"
             sh "pip --version"
             sh "pip install --user boto"
@@ -37,7 +37,7 @@ node('master') {
 
             //sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
             //sleep(300)
-            sh "ansible-playbook playbook-ansible-create-ec2.yaml -vvv -i inventory.txt"
+            sh "ansible-playbook playbook-ansible-create-ec2.yaml -i inventory.txt"
 
             //here is where i get the ip and session file name and fix it up, and put it in inventory file
             
@@ -54,7 +54,7 @@ node('master') {
 
             //connect to playbook 2 here to launch ec2 instance and install stuffs
             // sed -i '$ s/$/ ansible_ssh_common_args='-o StrictHostKeyChecking=no' /' inventory.txt
-            sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
+            sh "ansible-playbook playbook2.yaml -i inventory2.txt"
         }
             //sh "sed -i '\$ s/\$/ public_file=\\/var\\/lib\\/jenkins\\/workspace\\/test-project\\ ansible_ssh_common_args='-o StrictHostKeyChecking=no'  /' inventory2.txt"
           
