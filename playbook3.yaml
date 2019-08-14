@@ -1,6 +1,7 @@
 -
   name: running second playbook that deploys app and then deletes previous EC2 instance
-  hosts: all
+  hosts: localhost
+  connection: local
   become: yes
   become_method: sudo
   tasks:
