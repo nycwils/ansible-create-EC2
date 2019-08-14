@@ -1,0 +1,18 @@
+-
+  name: running second playbook that deploys app and then deletes previous EC2 instance
+  hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+
+  vars:
+    contents: "{{ lookup('file', '/var/lib/jenkins/workspace/wilson-test-create-ec2/instanceid.txt')}}"
+  tasks:
+    - debug: msg="the value of foo.txt is {{ contents }}"    
+
+    - name: Stop or terminate myserver instance
+      local_action:
+          module: ec2
+          region: "us-east-1"
+          instance_ids: "{{ contents }}"
+          state: stopped

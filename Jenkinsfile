@@ -60,6 +60,10 @@ node('master') {
             
             sh "sed -i \"\$ s/\$/ public_file=\\/var\\/lib\\/jenkins\\/workspace\\/test-project\\ ansible_ssh_common_args='-o StrictHostKeyChecking=no'/\" inventory2.txt"
             sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
+
+            //playbook 3 run
+            sh "ansible-playbook playbook3.yaml -vvv -i inventory1.txt"
+
         }
             //sh "sed -i '\$ s/\$/ public_file=\\/var\\/lib\\/jenkins\\/workspace\\/test-project\\ ansible_ssh_common_args='-o StrictHostKeyChecking=no'  /' inventory2.txt"
           
