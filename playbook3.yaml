@@ -1,10 +1,35 @@
 -
-  name: running second playbook that deploys app and then deletes previous EC2 instance
+  name: deleting the instance
   hosts: localhost
   connection: local
-  become: yes
-  become_method: sudo
-  tasks:
+  #gather_facts: False
+  tags: provisioning
+
+  vars: 
+    instance_type: t2.micro
+    security_group: wilson-test-WebDMZ
+    #image: ami-0756fbca465a59a30
+    image: ami-0b898040803850657
+    region: us-east-1
+    keypair: Wilson-Test-EC2KeyPair
+    count: 1
+
+
+
+    - name: is my new file here???  
+      shell: ls     
+
+    - name: Launch the new t2 micro EC2 Instance
+      local_action: ec2
+                      group={{ security_group }}
+                      instance_type={{ instance_type}}
+                      image={{ image }}
+                      wait=true
+                      region={{ region }}
+                      keypair={{ keypair }}
+                      count={{count}}
+                      
+      register: ec2
 
   vars:
     contents: "{{ lookup('file', '/var/lib/jenkins/workspace/wilson-test-create-ec2/instanceid.txt')}}"
