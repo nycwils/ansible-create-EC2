@@ -5,15 +5,19 @@
   become_method: sudo
   tasks:
 
-      vars:
-        contents: "{{ lookup('file', '/var/lib/jenkins/workspace/wilson-test-create-ec2/instanceid.txt')}}"
+  vars:
+    contents: "{{ lookup('file', '/var/lib/jenkins/workspace/wilson-test-create-ec2/instanceid.txt')}}"
+  tasks:
+    - debug: msg="the value of foo.txt is {{ contents }}"    
 
-    - name: Stop or terminate myserver instance
-      local_action:
-          module: ec2
-          region: "us-east-1"
-          instance_ids: "{{ contents }}"
-          state: stopped
+    # - name: Stop or terminate myserver instance
+    #   local_action:
+    #       module: ec2
+    #       region: "us-east-1"
+    #       instance_ids: "{{ contents }}"
+    #       state: stopped
+
+
       #with_items: "{{ ec2.instances}}"  
 
     # - name: Update all packages
