@@ -8,7 +8,8 @@
   vars: 
     instance_type: t2.micro
     security_group: wilson-test-WebDMZ
-    image: ami-0756fbca465a59a30
+    #image: ami-0756fbca465a59a30
+    image: ami-0b898040803850657
     region: us-east-1
     keypair: Wilson-Test-EC2KeyPair
     count: 1
