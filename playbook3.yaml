@@ -14,7 +14,7 @@
     keypair: Wilson-Test-EC2KeyPair
     count: 1
 
-
+  tasks:
 
     - name: is my new file here???  
       shell: ls     
