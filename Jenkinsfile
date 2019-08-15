@@ -1,17 +1,17 @@
 node('master') {
     def app
 
-    stage("Wipe Out Jenkins Temp Workspace") {
-
-      deleteDir()
-       
-    }
+    
 
     stage("Clone repository") {
         checkout scm
         }
 
+stage("Wipe Out Jenkins Temp Workspace") {
 
+      //deleteDir()
+       
+    }
 
     stage("Run Ancible Playbook") {
 
