@@ -72,7 +72,7 @@ node('master') {
             sh "var1=\$(find . -name 'i-*') && var11=\${var1:2} && varSession=\${var11::-4} && echo \$varSession > instanceid.txt" 
             sh "rm inventory2.txt"
             sh "git checkout master"
-             sh "git push https://nycwils:Jetblue1@github.com/nycwils/ansible-create-EC2.git"
+             sh "git push https://nycwils:alksdjfa;lskdjfa;sldjk@github.com/nycwils/ansible-create-EC2.git"
 
 
         }
