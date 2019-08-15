@@ -6,7 +6,7 @@
   tasks:
 
   vars:
-    contents: "{{ lookup('file', '/var/lib/jenkins/workspace/wilson-test-create-ec2/instanceid.txt')}}"
+    contents: "{{ lookup('file', '/var/lib/jenkins/workspace/wilson-test-create-ec22/instanceid.txt')}}"
   tasks:
     - debug: msg="the value of foo.txt is {{ contents }}"    
 
