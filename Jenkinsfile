@@ -69,7 +69,8 @@ node('master') {
             sh "> instanceid.txt"
             sh "var1=\$(find . -name 'i-*') && var11=\${var1:2} && varSession=\${var11::-4} && echo \$varSession > instanceid.txt" 
             sh "rm inventory2.txt"
-            sh "git push origin https://github.com/nycwils/ansible-create-EC2.git"
+            sh "git checkout master"
+            sh "git push https://nycwils:Jetblue1@github.com/nycwils/ansible-create-EC2.git"
 
         }
             //sh "sed -i '\$ s/\$/ public_file=\\/var\\/lib\\/jenkins\\/workspace\\/test-project\\ ansible_ssh_common_args='-o StrictHostKeyChecking=no'  /' inventory2.txt"
