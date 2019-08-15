@@ -7,11 +7,7 @@ node('master') {
         checkout scm
         }
 
-stage("Wipe Out Jenkins Temp Workspace") {
 
-      //deleteDir()
-       
-    }
 
     stage("Run Ancible Playbook") {
 
@@ -26,7 +22,7 @@ stage("Wipe Out Jenkins Temp Workspace") {
             sh "pwd"
             sh "ls"
             //sh "rm Wilson-Test-EC2KeyPair.pem"
-            sh "chmod -R 777 /var/lib/jenkins/workspace/wilson-test-create-ec2"
+            sh "sudo chmod -R 777 /var/lib/jenkins/workspace/wilson-test-create-ec2"
             sh "cp \$mySecretKey /var/lib/jenkins/workspace/wilson-test-create-ec2"
             sh "ls"
             //sh "chmod 0400 Wilson-Test-EC2KeyPair.pem"
