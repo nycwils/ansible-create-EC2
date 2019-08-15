@@ -46,7 +46,10 @@ node('master') {
 
             //save the instance id
             //sh "var1=\$(find . -name 'i-*') && var11=\${var1:2} && varSession=\${var11::-4} && echo \$varSession" 
-            sh "var1=\$(find . -name 'i-*') && var11=\${var1:2} && varSession=\${var11::-4} && echo \$varSession > instanceid.txt" 
+            
+            //copying to below
+            //sh "var1=\$(find . -name 'i-*') && var11=\${var1:2} && varSession=\${var11::-4} && echo \$varSession > instanceid.txt" 
+            
             //save the ip address
             sh "var2=\$(find . -name [0-9]*) && var22=\${var2:2} && varIP=\${var22::-4} && echo \$varIP && echo \$varIP > inventory2.txt"
             sh "sed -i '1s/^/target2 ansible_host=ec2-user@/' inventory2.txt"
@@ -62,7 +65,11 @@ node('master') {
             sh "ansible-playbook playbook2.yaml -vvv -i inventory2.txt"
 
             //playbook 3 run
-            //sh "ansible-playbook playbook3.yaml -vvv -i inventory.txt"
+            sh "ansible-playbook playbook3.yaml -vvv -i inventory.txt"
+            sh "> instanceid.txt"
+            sh "var1=\$(find . -name 'i-*') && var11=\${var1:2} && varSession=\${var11::-4} && echo \$varSession > instanceid.txt" 
+            sh "rm inventory2.txt"
+            sh "git push origin https://github.com/nycwils/ansible-create-EC2.git"
 
         }
             //sh "sed -i '\$ s/\$/ public_file=\\/var\\/lib\\/jenkins\\/workspace\\/test-project\\ ansible_ssh_common_args='-o StrictHostKeyChecking=no'  /' inventory2.txt"
