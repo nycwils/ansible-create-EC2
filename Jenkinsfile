@@ -71,14 +71,20 @@ node('master') {
             sh "> instanceid.txt"
             sh "var1=\$(find . -name 'i-*') && var11=\${var1:2} && varSession=\${var11::-4} && echo \$varSession > instanceid.txt" 
             sh "rm inventory2.txt"
-            sh "git checkout master"
-             sh "git push https://nycwils:alksdjfa;lskdjfa;sldjk@github.com/nycwils/ansible-create-EC2.git"
+            //sh "git checkout master; git update; git commit instanceid.txt; git add .; git push origin master; "
+            // sh "git push https://nycwils:alksdjfa;lskdjfa;sldjk@github.com/nycwils/ansible-create-EC2.git"
 
 
         }
             //sh "sed -i '\$ s/\$/ public_file=\\/var\\/lib\\/jenkins\\/workspace\\/test-project\\ ansible_ssh_common_args='-o StrictHostKeyChecking=no'  /' inventory2.txt"
           
         }
+
+       stage('update github with new isntance id') {
+       git branch: 'lts-1.532', credentialsId: 'wilson-github', url: 'https://github.com/nycwils/ansible-create-EC2.git'
+       
+       sh "git checkout master; git update; git commit instanceid.txt; git add .; git push origin master; "
+   }
        
     //sed -i '$ s/$/ ansible_ssh_private_key_file=\/var\/lib\/jenkins\/workspace\/wilson-test-create-ec2\/Wilson-Test-EC2KeyPair.pem/' inventory2.txt
     //sed -i '$ s/$/ Wilson-Test-EC2KeyPair.pem ansible_ssh_common_args='"'"'-o StrictHostKeyChecking=no'"'"'  /'"'" inventory.txt
