@@ -68,8 +68,8 @@ node('master') {
 
             //playbook 3 run
             sh "ansible-playbook playbook3.yaml -vvv -i inventory.txt"
-            sh "> instanceid.txt"
-            sh "var1=\$(find . -name 'i-*') && var11=\${var1:2} && varSession=\${var11::-4} && echo \$varSession > instanceid.txt" 
+            //sh "> instanceid.txt"
+            //sh "var1=\$(find . -name 'i-*') && var11=\${var1:2} && varSession=\${var11::-4} && echo \$varSession > instanceid.txt" 
             sh "rm inventory2.txt"
             //sh "git checkout master; git update; git commit instanceid.txt; git add .; git push origin master; "
             // sh "git push https://nycwils:alksdjfa;lskdjfa;sldjk@github.com/nycwils/ansible-create-EC2.git"
@@ -85,6 +85,8 @@ node('master') {
        
             sh "git fetch --all;"
             sh "ls"
+            sh "> instanceid.txt"
+            sh "var1=\$(find . -name 'i-*') && var11=\${var1:2} && varSession=\${var11::-4} && echo \$varSession > instanceid.txt" 
             sh" git add instanceid.txt;"
             sh" git commit instanceid.txt -m 'aa';"
 
