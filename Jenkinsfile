@@ -83,7 +83,15 @@ node('master') {
        stage('update github with new isntance id') {
        git branch: 'master', credentialsId: 'wilson-github', url: 'https://github.com/nycwils/ansible-create-EC2.git'
        
-       sh "git fetch --all; git commit instanceid.txt; git add instanceid.txt; git push origin master; "
+            sh "git fetch --all;"
+            sh "ls"
+            sh" git add instanceid.txt;"
+            sh" git commit instanceid.txt -m 'aa';"
+
+                   withCredentials([usernamePassword(credentialsId: 'wilson-github', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh" git push https://$USERNAME:$PASSWORD@github.com/nycwils/ansible-create-EC2.git;"
+
+                    }
    }
        
     //sed -i '$ s/$/ ansible_ssh_private_key_file=\/var\/lib\/jenkins\/workspace\/wilson-test-create-ec2\/Wilson-Test-EC2KeyPair.pem/' inventory2.txt
