@@ -9,80 +9,80 @@
     contents: "{{ lookup('file', '/var/lib/jenkins/workspace/wilson-test-create-ec22/instanceid.txt')}}"
   tasks:
     - debug: msg="the value of foo.txt is {{ contents }}"    
+################### deployment of stuffs below using docker #######################
+    - name: Stop or terminate myserver instance
+      local_action:
+          module: ec2
+          region: "us-east-1"
+          instance_ids: "{{ contents }}"
+          state: stopped
 
-    # - name: Stop or terminate myserver instance
-    #   local_action:
-    #       module: ec2
-    #       region: "us-east-1"
-    #       instance_ids: "{{ contents }}"
-    #       state: stopped
 
+      with_items: "{{ ec2.instances}}"  
 
-      #with_items: "{{ ec2.instances}}"  
+    - name: Update all packages
+      yum:
+        name: '*'
+        state: latest
+        update_only: yes
 
-    # - name: Update all packages
-    #   yum:
-    #     name: '*'
-    #     state: latest
-    #     update_only: yes
+    - name: Ensure a list of yum packages are installed
+      yum:
+        name: "{{ packages }}"
+        state: latest
+        update_cache: yes
+      vars:
+        packages:
+        - python-pip
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
+        - amazon-linux-extras
 
-    # - name: Ensure a list of yum packages are installed
-    #   yum:
-    #     name: "{{ packages }}"
-    #     state: latest
-    #     update_cache: yes
-    #   vars:
-    #     packages:
-    #     - python-pip
-    #     - yum-utils
-    #     - device-mapper-persistent-data
-    #     - lvm2
-    #     - amazon-linux-extras
+    - name: Add extras repository
+      shell: yum-config-manager --enable extras
 
-    # - name: Add extras repository
-    #   shell: yum-config-manager --enable extras
+    - name: Install docker-ce (centos) via amazon-linux-extras packages
+      shell: "amazon-linux-extras install docker=18.06.1 -y"
 
-    # - name: Install docker-ce (centos) via amazon-linux-extras packages
-    #   shell: "amazon-linux-extras install docker=18.06.1 -y"
+    - name: Enable Docker CE service at startup
+      service:
+        name: docker
+        state: started
+        enabled: yes
 
-    # - name: Enable Docker CE service at startup
-    #   service:
-    #     name: docker
-    #     state: started
-    #     enabled: yes
+    - name: Ensure Python pip packages are installed
+      pip:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - boto
+        - boto3
+        - docker-compose
 
-    # - name: Ensure Python pip packages are installed
-    #   pip:
-    #     name: "{{ packages }}"
-    #   vars:
-    #     packages:
-    #     - boto
-    #     - boto3
-    #     - docker-compose
+    - name: pull an image
+      docker_image:
+        name: nyuwilson/wilson:jenkinsdockerpush
 
-    # - name: pull an image
-    #   docker_image:
-    #     name: nyuwilson/wilson:jenkinsdockerpush
+    - name: stop all docker containers
+      shell: docker stop $(docker ps -a -q)
+      ignore_errors: true
 
-    # - name: stop all docker containers
-    #   shell: docker stop $(docker ps -a -q)
-    #   ignore_errors: true
+    - name: service docker
+      service:
+        name=docker
+        state=started
+        enabled=yes
 
-    # - name: service docker
-    #   service:
-    #     name=docker
-    #     state=started
-    #     enabled=yes
+    - name: Start docker docker_container
+      docker_container:
+        name: nyuwilson
+        image: nyuwilson/wilson:jenkinsdockerpush
+        ports:
+          - "80:80"
 
-    # - name: Start docker docker_container
-    #   docker_container:
-    #     name: nyuwilson
-    #     image: nyuwilson/wilson:jenkinsdockerpush
-    #     ports:
-    #       - "80:80"
-
-    # - name: check if docker is Running
-    #   shell: docker ps
+    - name: check if docker is Running
+      shell: docker ps
 
 
 
